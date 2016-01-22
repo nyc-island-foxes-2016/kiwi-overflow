@@ -4,7 +4,7 @@ class CreateVotes < ActiveRecord::Migration
       t.integer :user_id, index: true, null: false
       t.integer :votable_id, polymorphic: true, index: true, null: false
       t.string :votable_type, polymorphic: true, null: false
-      t.integer :direction null: false
+      t.integer :direction, null: false
 
       t.timestamps null: false
     end
