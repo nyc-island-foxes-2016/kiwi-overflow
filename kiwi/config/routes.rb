@@ -1,20 +1,23 @@
 Rails.application.routes.draw do
 
- resources :users do
-  resources :question, only: [:new, :edit]
- end
+ # resources :users do
+ #  resources :questions, only: [:new, :edit, :index]
+ # end
 
- resources :question do
-  resources :answer, only: [:new, :show, :delete, :edit]
-  resources :comment, only: [:new, :show]
+ resources :questions do
+  # resources :answers, only: [:new, :show, :delete, :edit]
+  # resources :comments, only: [:new, :show]
   end
 
- resources :answer do
-  resources :comment, only: [:new, :show]
- end
+ # resources :answers do
+ #  resources :comments, only: [:new, :show]
+ # end
 
   resources :users, only: [ :new, :show, :create ]
   resources :sessions, only: [ :new, :create, :destroy ]
+
+
+  root 'questions#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
