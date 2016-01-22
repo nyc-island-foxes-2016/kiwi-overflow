@@ -2,8 +2,8 @@ class Answers < ApplicationController
   belongs_to :user
   belongs_to :question
 
-  has_many :comments, as :commentable
-  has_many :votes, as :votable
+  has_many :comments, as: :commentable
+  has_many :votes, as: :votable
 
   validates_presence_of :content, :user, :question
 end
