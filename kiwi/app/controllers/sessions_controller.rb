@@ -1,4 +1,4 @@
-class Admin::SessionsController < ApplicationController
+class SessionsController < ApplicationController
 
   def new
   end
@@ -9,8 +9,8 @@ class Admin::SessionsController < ApplicationController
       login @user
       redirect_to root_path
     else
-      flash[:notice] = "Bad email/password combination"
-      redirect_to new_admin_session_path
+      flash[:notice] = "Invalid email or password"
+      redirect_to new_session_path
     end
   end
 
