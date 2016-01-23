@@ -53,13 +53,17 @@
 
 <hr>
 
+<h4>Your Answer</h4>
 <div id="answers-form">
-<%= form_for[@question, @answer] %>
+<%= form_for [@question, @question.answers.build] do |f| %>
   <fieldset id="form" class="container">
     <div id="input-options">
       <%= f.text_area :content %>
+      <%= f.hidden_field :question_id %>
+      <% if logged_in? %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+      <% end %>
     </div>
-
     <%= f.submit 'Post Answer' %>
   </fieldset>
 <% end %>
