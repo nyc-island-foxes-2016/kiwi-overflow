@@ -49,3 +49,18 @@
     <% end %>
   </div>
 <% end %>
+
+
+<hr>
+
+<div id="answers-form">
+<%= form_for[@question, @answer] %>
+  <fieldset id="form" class="container">
+    <div id="input-options">
+      <%= f.text_area :content %>
+    </div>
+
+    <%= f.submit 'Post Answer' %>
+  </fieldset>
+<% end %>
+</div>
