@@ -5,6 +5,7 @@
 </div>
 
 <%= link_to "Edit my question", edit_question_path %>
+<%= link_to "Delete my question", question_path, method: :delete %>
 
 <div id="answers-container" class="container">
   <% @question.answers.each do |answer|%>
