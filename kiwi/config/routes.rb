@@ -4,14 +4,16 @@ Rails.application.routes.draw do
  #  resources :questions, only: [:new, :edit, :index]
  # end
 
- resources :questions do
+  resources :questions do
   # resources :answers, only: [:new, :show, :delete, :edit]
-  # resources :comments, only: [:new, :show]
+    resources :comments, only: [:new, :create]
   end
 
  # resources :answers do
- #  resources :comments, only: [:new, :show]
+ # resources :comments, only: [:new, :show]
  # end
+
+ resources :comments, only: [ :edit, :update, :destroy ]
 
   resources :users, only: [ :new, :show, :create ]
   resources :sessions, only: [ :new, :create, :destroy ]
