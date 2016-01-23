@@ -6,11 +6,16 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @commentable = Question.find_by(id: params[:id])
-    @comment = @commentable.comments.new(comment_params)
-    @comment.user = current_user
+    binding.pry
+    if params[:question_id]
+      question = Question.find_by(id: params[:question_id])
+      @comment = question.comments.new(user: current_user, content: params[:comment][:content])
+    else
+      answer = Answer.find_by(id: params[:answer_id])
+      @comment = answer.comments.new(user: current_user, content: params[:comment][:content])
+    end
     if @comment.save
-      redirect_to question_path(id: @commentable_id)
+      redirect_to question_path(id: @comment.commentable_id)
     else
       render :new
     end
