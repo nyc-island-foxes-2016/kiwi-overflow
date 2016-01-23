@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+    binding.pry
     if @question.save
       redirect_to question_path
     else
@@ -20,7 +21,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find_by(id: params[:id])
+    @question = Question.includes(:answers, :user).find(params[:id])
   end
 
   def edit
