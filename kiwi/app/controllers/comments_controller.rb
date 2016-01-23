@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-    binding.pry
     if params[:question_id]
       question = Question.find_by(id: params[:question_id])
       @comment = question.comments.new(user: current_user, content: params[:comment][:content])
@@ -21,24 +20,26 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit
-    @comment = Comment.find_by(id: params[:id])
-  end
+  # NOT YET WORKING
+  # def edit
+  #   @comment = Comment.find_by(id: params[:id])
+  # end
 
-  def update
-    @comment = Comment.find_by(id: params[:id])
-    if @comment.update_attributes(comment_params)
-      redirect_to
-    else
-      render :edit
-    end
-  end
+  # def update
+  #   @comment = Comment.find_by(id: params[:id])
+  #   if @comment.update_attributes(comment_params)
+  #     redirect_to
+  #   else
+  #     render :edit
+  #   end
+  # end
 
-  def destroy
-    @comment = Comment.find_by(id: params[:id])
-    @comment.destroy
-    redirect_to questions_path
-  end
+  # def destroy
+  #   @comment = Comment.find_by(id: params[:id])
+  #   commentable_id = @comment.commentable.id
+  #   @comment.destroy
+  #   redirect_to questions_path(commentable_id)
+  # end
 
   private
 
