@@ -1,5 +1,13 @@
 <%= form_tag sessions_path do %>
-  <%= email_field_tag :email, nil, :placeholder => "Email"  %>
-  <%= password_field_tag :password, nil, :placeholder => "Password"  %>
-  <%= submit_tag "Log In" %>
+<fieldset id="form">
+	<div class="input-options">
+		<%= email_field_tag :email, nil, :placeholder => "Email"  %>
+	</div>
+	<div class="input-options">
+		<%= password_field_tag :password, nil, :placeholder => "Password"  %>
+	</div>
+	<div class="form-button">
+		<%= submit_tag "Log In" %>
+	</div>
+</fieldset>
 <% end  %>
