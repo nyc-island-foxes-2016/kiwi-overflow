@@ -1,17 +1,4 @@
-<h1>Edit Your Question</h1>
-    <%= form_for @question do |f| %>
-    <fieldset id="form" class="container">
-      <div id="input-options">
-        <%= f.label :title %>
-        <%= f.text_field :title %>
-      </div>
+<h2>Edit Your Question</h2>
 
-      <div id="input-options">
-        <%= f.label :content %>
-        <%= f.text_area :content %>
-      </div>
-
-      <%= f.submit 'Save your question' %>
-    </fieldset>
-<% end %>
+<%= render partial: "form" %>
 
