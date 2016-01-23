@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
-  <title>Kiwi</title>
+ <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,900' rel='stylesheet' type='text/css'>
+  <title>Kiwi Overflow</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <header>
-    <h1>Kiwi Overflow</h1>
     <nav>
+      <img id="kiwi" src="http://pngimg.com/upload/kiwi_PNG4037.png"  />
+      <h1 id="logo">Kiwi Overflow</h1>
       <ul>
         <% if logged_in? %>
-          <li>Welcome, <%= current_user.name %></li>
-          <li><%= link_to("Log Out", session_path(current_user), method: :delete) %></li>
+          <li>welcome, <%= current_user.name %></li> |
+          <li><%= link_to "Post a Question", new_question_path %></li> |
+          <li><%= link_to("Log Out", session_path(current_user), method: :delete) %></li> ||
         <% else %>
-          <li><%= link_to "Register", new_user_path %></li>
-          <li><%= link_to "Login", new_session_path %></li>
+          <li><%= link_to "Register", new_user_path %></li> |
+          <li><%= link_to "Login", new_session_path %></li> ||
         <% end %>
           <li><%= link_to "All Questions", questions_path %></li>
       </ul>
