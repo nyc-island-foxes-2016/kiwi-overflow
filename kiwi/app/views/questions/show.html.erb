@@ -1,0 +1,15 @@
+<div id="question-info" class="container">
+  <%= @question.title %>
+    <br>
+  <%= @question.content%> .....by <%= @question.user.name %>
+</div>
+
+<div id="answers-container" class="container">
+  <% @question.answers.each do |answer|%>
+    <div>
+      <%= answer.content %>
+    </div>
+  <% end %>
+</div>
+
+

@@ -1,20 +1,18 @@
 <h1>POST A NEW QUESTION</h1>
+    <%= form_for @question do |f| %>
+    <fieldset id="form" class="container">
+      <div id="input-options">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </div>
 
-<%= form_for @question do |f| %>
-<fieldset id="form">
-  <div id="input-options">
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  </div>
+      <div id="input-options">
+        <%= f.label :content %>
+        <%= f.text_area :content %>
+      </div>
 
-  <div id="input-options">
-  <%= f.label :content %>
-  <%= f.text_area :content %>
-  </div>
-
-  <%= f.submit 'POST YOUR QUESTION' %>
-</fieldset>
-
+      <%= f.submit 'POST YOUR QUESTION' %>
+    </fieldset>
 <% end %>
 
 
