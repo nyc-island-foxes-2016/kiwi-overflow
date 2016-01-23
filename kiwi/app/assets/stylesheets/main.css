@@ -16,6 +16,8 @@ header {
 
 nav {
   margin: 0 auto;
+  padding:0;
+
 }
 
 #kiwi {
@@ -31,6 +33,7 @@ nav {
 
 nav ul {
   display: inline;
+  padding: 0;
 }
 
 nav li {
@@ -84,7 +87,7 @@ form, #new-user {
 
 .input-options {
   display:block;
-  padding:5px;
+  padding:10px;
 }
 
 textarea {
@@ -101,6 +104,18 @@ textarea {
 
 }
 
+.submit-button {
+  text-align: center;
+}
+
 p {
   font-weight: 300;
+}
+
+label{
+  width: 4em;
+  float: left;
+  text-align: right;
+  margin-right: 1.5em;
+  display: block
 }
