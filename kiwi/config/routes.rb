@@ -1,14 +1,23 @@
 Rails.application.routes.draw do
 
-  ############# USER AND SESSIONS ROUTES #################
+ # resources :users do
+ #  resources :questions, only: [:new, :edit, :index]
+ # end
 
-  # These can be deleted if they have been added elsewhere by the routes team.
+ resources :questions do
+  # resources :answers, only: [:new, :show, :delete, :edit]
+  # resources :comments, only: [:new, :show]
+  end
+
+ # resources :answers do
+ #  resources :comments, only: [:new, :show]
+ # end
 
   resources :users, only: [ :new, :show, :create ]
   resources :sessions, only: [ :new, :create, :destroy ]
 
 
-  ########### END USERS AND SESSIONS ROUTES ################
+  root 'questions#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
