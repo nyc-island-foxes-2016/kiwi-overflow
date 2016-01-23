@@ -1,8 +1,11 @@
 <div id="question-info" class="container">
-  <%= @question.title %>
-    <br>
-  <%= @question.content%> .....by <%= @question.user.name %>
+  <h3><%= @question.title %></h3>
+  <p><%= @question.content%></p>
+  <p>Asked by <%= @question.user.name %> on <%= std_format_date(@question.created_at) %></p>
 </div>
+
+<%= link_to "Edit my question", edit_question_path %>
+<%= link_to "Delete my question", question_path, method: :delete %>
 
 <div id="answers-container" class="container">
   <% @question.answers.each do |answer|%>

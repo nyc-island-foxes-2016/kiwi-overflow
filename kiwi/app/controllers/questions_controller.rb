@@ -11,9 +11,11 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    binding.pry
     @question = Question.new(question_params)
+    @question.user = current_user
     if @question.save
-      redirect_to question_path
+      redirect_to question_path(id: @question.id)
     else
       render :new
     end
@@ -25,6 +27,10 @@ class QuestionsController < ApplicationController
 
   def edit
     @question = Question.find_by(id: params[:id])
+  end
+
+  def update
+        @question = Question.find_by(id: params[:id])
     if @question.update_attributes(question_params)
       redirect_to question_path
     else
@@ -32,9 +38,10 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @question = Question.find_by(id: params[:id])
     @question.destroy
+    redirect_to questions_path
   end
 
   private
