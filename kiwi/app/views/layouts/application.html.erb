@@ -15,6 +15,7 @@
       <ul>
         <% if logged_in? %>
           <li>welcome, <%= current_user.name %></li> |
+          <li><%= link_to "Post a Question", new_question_path %></li> |
           <li><%= link_to("Log Out", session_path(current_user), method: :delete) %></li> ||
         <% else %>
           <li><%= link_to "Register", new_user_path %></li> |
