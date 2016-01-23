@@ -4,8 +4,10 @@
   <p>Asked by <%= @question.user.name %> on <%= std_format_date(@question.created_at) %></p>
 </div>
 
-<%= link_to "Edit my question", edit_question_path %>
-<%= link_to "Delete my question", question_path, method: :delete %>
+<% if current_user == @question.user %>
+  <%= link_to "Edit my question", edit_question_path %>
+  <%= link_to "Delete my question", question_path, method: :delete %>
+<% end %>
 
 <div id="answers-container" class="container">
   <% @question.answers.each do |answer|%>
