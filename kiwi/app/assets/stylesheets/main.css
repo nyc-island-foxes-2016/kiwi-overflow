@@ -54,8 +54,16 @@ main {
   margin-bottom: 1em;
 }
 
+form, #new-user {
+  margin: 1em;
+}
+
+
+
+
 #form {
-  display:inline;
+  display: inline;
+  width: 90%;
 }
 
 #input-options {
@@ -63,19 +71,9 @@ main {
   padding:5px;
 }
 
-
-.web-title {
-  padding:10px;
-  margin:0 auto;
-  text-align: center;
-}
-
-
-
 ul {
   padding-left: 0;
 }
-
 
 a {
   text-decoration: none;
