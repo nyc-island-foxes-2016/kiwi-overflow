@@ -7,11 +7,28 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-
-<h1 class="web-title">KIWI-OVERFLOW</h1>
 <body>
-
-<%= yield %>
+  <header>
+    <h1>Kiwi Overflow</h1>
+    <nav>
+      <ul>
+        <% if logged_in? %>
+          <li>Welcome, <%= current_user.name %></li>
+          <li><%= link_to("Log Out", session_path(current_user), method: :delete) %></li>
+        <% else %>
+          <li><%= link_to "Register", new_user_path %></li>
+          <li><%= link_to "Login", new_session_path %></li>
+        <% end %>
+          <li><%= link_to "All Questions", questions_path %></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+      <%= yield %>
+  </main>
+  <footer>
+    <p>2016 &copy; Jeff, Luis, Zach, and Nicola</p>
+  </footer>
 
 </body>
 </html>
