@@ -34,12 +34,16 @@ class CommentsController < ApplicationController
   #   end
   # end
 
-  # def destroy
-  #   @comment = Comment.find_by(id: params[:id])
-  #   commentable_id = @comment.commentable.id
-  #   @comment.destroy
-  #   redirect_to questions_path(commentable_id)
-  # end
+  def destroy
+    @comment = Comment.find_by(id: params[:id])
+    commentable = @comment.commentable
+    @comment.destroy
+    if commentable.is_a? Question
+      redirect_to question_path(commentable.id)
+    else
+      redirect_to question_path(commentable.question.id)
+    end
+  end
 
   private
 
