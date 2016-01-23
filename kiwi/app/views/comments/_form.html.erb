@@ -1,0 +1,14 @@
+<% binding.pry %>
+
+<%= form_for [@question, @question.comments.build] do |f| %>
+  <fieldset id="form">
+
+    <div class="input-options">
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+
+    <%= f.submit 'Save your comment' %>
+
+  </fieldset>
+<% end %>

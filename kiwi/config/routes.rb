@@ -4,9 +4,9 @@ Rails.application.routes.draw do
  #  resources :questions, only: [:new, :edit, :index]
  # end
 
- resources :questions do
+  resources :questions do
   # resources :answers, only: [:new, :show, :delete, :edit]
-  # resources :comments, only: [:new, :show]
+    resources :comments, only: [:new, :create, :edit, :update, :destroy]
   end
 
  # resources :answers do
