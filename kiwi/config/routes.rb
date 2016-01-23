@@ -6,10 +6,9 @@ Rails.application.routes.draw do
 
 
  resources :questions do
-  resources :answers, only: [:new]
   resources :comments, only: [:new, :create]
-  # resources :comments, only: [:new, :show]
-  end
+  resources :answers, only: [:create]
+ end
 
  # resources :answers do
  # resources :comments, only: [:new, :show]
