@@ -11,7 +11,9 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    binding.pry
     @question = Question.new(question_params)
+    @question.user = current_user
     if @question.save
       redirect_to question_path
     else
