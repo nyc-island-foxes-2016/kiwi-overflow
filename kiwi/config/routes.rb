@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+
+  ############# USER AND SESSIONS ROUTES #################
+
+  # These can be deleted if they have been added elsewhere by the routes team.
+
+  resources :users, only: [ :new, :show, :create ]
+  resources :sessions, only: [ :new, :create, :destroy ]
+
+
+  ########### END USERS AND SESSIONS ROUTES ################
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
