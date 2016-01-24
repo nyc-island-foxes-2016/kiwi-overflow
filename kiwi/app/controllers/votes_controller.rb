@@ -1,9 +1,9 @@
 class VotesController < ApplicationController
-  # before_action :vote_type
 
   def create
     @vote = current_user.votes.new(vote_params)
-    if !!params[:question_id]
+      binding.pry
+    if !!params[:question_id] && Question.find(params[:question_id]).voted?
       @vote.votable_type = "Question"
       @vote.votable_id = params[:question_id]
       @vote.save
