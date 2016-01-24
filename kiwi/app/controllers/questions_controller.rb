@@ -1,7 +1,5 @@
 class QuestionsController < ApplicationController
 
-  # before_filter
-
   def index
     @questions = Question.all
     if params[:sort] == "trending"
@@ -9,8 +7,7 @@ class QuestionsController < ApplicationController
     elsif params[:sort] == "most-recent"
       @question = @questions.order(:created_at)
     elsif params[:sort] == "rate"
-      binding.pry
-      @question = @questions.sort_by { |question| question.votes.count }.reverse
+      @question = @questions.sort_by { |question| question.sum_of_votes }.reverse
     else
 
     end
