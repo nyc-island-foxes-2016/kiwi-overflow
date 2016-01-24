@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
 
   def new
-    binding.pry
     if params[:question_id]
       @commentable = Question.find_by(id: params[:question_id])
     else
