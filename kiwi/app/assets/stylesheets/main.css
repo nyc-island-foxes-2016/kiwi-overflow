@@ -144,7 +144,6 @@ label{
   float: left;
   margin-right: 1em;
   font-size: 1em;
-  margin-bottom: 10em;
 }
 
 .vote-attributes{
@@ -179,5 +178,8 @@ label{
 
 ul li {
   list-style: none;
+}
+
+#question-content {
 }
 

@@ -12,10 +12,10 @@ zach = User.create(name: "zach_dbc", email: "zach@example.com", password: "passw
 jeff = User.create(name: "jeff_dbc", email: "jeff@example.com", password: "password")
 hacker_bot = User.create(name: "hacker_bot", email: "hacker_bot@example.com", password: "password")
 
-rails_q = Question.create(title: "How do I build a Rails app?", content: Faker::Lorem.paragraph(10), user: nicola)
-sinatra_q =Question.create(title: "How do I build a Sinatra app?", content: Faker::Lorem.paragraph(10), user: luis)
-mvc_q = Question.create(title: "What is MVC?", content: Faker::Lorem.paragraph(10), user: zach)
-css_q = Question.create(title: "What are the best CSS styles?", content: Faker::Lorem.paragraph(10), user: jeff)
+rails_q = Question.create(title: "How do I build a Rails app?", content: Faker::Lorem.paragraph(3), user: nicola)
+sinatra_q =Question.create(title: "How do I build a Sinatra app?", content: Faker::Lorem.paragraph(3), user: luis)
+mvc_q = Question.create(title: "What is MVC?", content: Faker::Lorem.paragraph(3), user: zach)
+css_q = Question.create(title: "What are the best CSS styles?", content: Faker::Lorem.paragraph(3), user: jeff)
 
 answer = Answer.create(content:"It's super easy just follow the rails guide.", user: luis, question: rails_q)
 Answer.create(content:"Just ask someone from phase 2.", user: jeff, question: sinatra_q)
