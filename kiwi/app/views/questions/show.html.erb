@@ -15,7 +15,6 @@
 <% if logged_in? %>
   <ul>
     <li><%= link_to "Add Comment", new_question_comment_path(@question.id) %></li>
-    <li><%= link_to "Add Answer", new_question_path %></li>
   </ul>
 <% end %>
 
@@ -55,16 +54,5 @@
 
 <h4>Your Answer</h4>
 <div id="answers-form">
-<%= form_for [@question, @question.answers.build] do |f| %>
-  <fieldset id="form" class="container">
-    <div id="input-options">
-      <%= f.text_area :content %>
-      <%= f.hidden_field :question_id %>
-      <% if logged_in? %>
-      <%= f.hidden_field :user_id, :value => current_user.id %>
-      <% end %>
-    </div>
-    <%= f.submit 'Post Answer' %>
-  </fieldset>
-<% end %>
+<%= render "answers/form" %>
 </div>
