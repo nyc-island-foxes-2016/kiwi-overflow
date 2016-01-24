@@ -1,12 +1,12 @@
+#this may not be the correct way to generate FactoryGirl objects...still in progress
+
 FactoryGirl.define do
-  factory :user do
-    sequence(:name) {|n| "user#{n}" }
-    sequence(:email) {|n| "email#{n}@gmail.com" }
-    password "password"
+
+  factory :question do |f|
+    f.title { Faker::Lorem.sentence }
+    f.content { Faker::Lorem.paragraph }
+    f.user_id { rand(1..10) }
   end
 
-  factory :question do
-    title { Faker::Lorem.sentence }
-    content { Faker::Lorem.paragraph }
-  end
 end
+
