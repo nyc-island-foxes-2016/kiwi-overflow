@@ -11,13 +11,11 @@ Rails.application.routes.draw do
   resources :votes, only: [ :create, :destroy ]
  end
 
-  resources :answers do
-    resources :comments, only: [:new, :create]
-  end
+ resources :answers do
+  resources :comments, only: [:new, :create]
+  resources :votes, only: [:create, :destroy]
+ end
 
- # resources :answers do
- # resources :comments, only: [:new, :show]
- # end
 
  resources :comments, only: [ :edit, :update, :destroy ]
 

@@ -4,8 +4,8 @@
 <div class="vote-container">
   <ul class="vote-attributes">
     <li id="up-vote"><%= link_to '&#x25B2'.html_safe, question_votes_path(@question, vote: {direction: '1'}), method: :post %></li>
-    <li><%= @question.votes.count %></li>
-    <li id="down-vote"><%= link_to '&#x25BC'.html_safe %></li>
+    <li><%= @question.sum_of_votes %></li>
+    <li id="down-vote"><%= link_to '&#x25BC'.html_safe, question_votes_path(@question, vote: {direction: '-1'}), method: :post %></li>
   </ul>
 </div>
 
@@ -42,6 +42,13 @@
     <h4>Answers: <%=@question.answers.count %></h4>
     <% @question.answers.each do |answer|%>
       <div class="answer">
+        <div class="vote-container">
+  <ul class="vote-attributes">
+    <li id="up-vote"><%= link_to '&#x25B2'.html_safe, answer_votes_path(answer, vote: {direction: '1'}), method: :post %></li>
+    <li><%= answer.sum_of_votes %></li>
+    <li id="down-vote"><%= link_to '&#x25BC'.html_safe, answer_votes_path(answer, vote: {direction: '-1'}), method: :post %></li>
+  </ul>
+</div>
         <span class="user-time">Answered by <%= answer.user.name %> <%= std_format_date(answer.created_at) %></span>
         <p><%= answer.content %></p>
         <% if !answer.comments.empty? %>
