@@ -1,4 +1,14 @@
 <h2>Edit your comment</h2>
 
-<%= render partial: "form" %>
+<%= form_for @comment do |f| %>
+  <fieldset id="form">
 
+    <div class="input-options">
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+
+    <%= f.submit 'Save your comment' %>
+
+  </fieldset>
+<% end %>

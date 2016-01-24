@@ -21,20 +21,20 @@ class CommentsController < ApplicationController
     end
   end
 
-  # NOT YET WORKING
-  # def edit
-  #   binding.pry
-  #   @comment = Comment.find_by(id: params[:id])
-  # end
+  def edit
+    @comment = Comment.find_by(id: params[:id])
+    @question = Question.find_by(id: @comment.commentable_id)
+  end
 
-  # def update
-  #   @comment = Comment.find_by(id: params[:id])
-  #   if @comment.update_attributes(comment_params)
-  #     redirect_to
-  #   else
-  #     render :edit
-  #   end
-  # end
+  def update
+    @comment = Comment.find_by(id: params[:id])
+    if @comment.update_attributes(comment_params)
+      # We may need a conditional here once we have comments to answers as well
+      redirect_to question_path(id: @comment.commentable_id)
+    else
+      render :edit
+    end
+  end
 
   def destroy
     @comment = Comment.find_by(id: params[:id])
