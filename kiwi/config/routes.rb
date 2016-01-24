@@ -8,6 +8,7 @@ Rails.application.routes.draw do
  resources :questions do
   resources :comments, only: [:new, :create]
   resources :answers, only: [:create]
+  resources :votes, only: [ :create, :destroy ]
  end
 
  # resources :answers do
