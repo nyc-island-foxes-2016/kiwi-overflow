@@ -1,19 +1,25 @@
 class AnswersController < ApplicationController
-add_flash_types(:alert)
-def create
-  @answer = Answer.new(answer_params)
-  if @answer.save
-    redirect_to question_path(id: @answer.question_id)
-  else
-    #error to be handled by ajax
-    redirect_to login_path
+  add_flash_types(:alert)
+
+  def create
+    @answer = Answer.new(answer_params)
+    binding.pry
+    if @answer.save
+      if request.xhr?
+        render question_path(id: @answer.question_id), layout: false, locals: { answer: @answer }
+      else
+        redirect_to question_path(id: @answer.question_id)
+      end
+    else
+      @errors = Answer.errors.full_messages
+      redirect_to question_path(id: @answer.question_id)
+    end
   end
-end
 
-private
+  private
 
-def answer_params
-  params.require(:answer).permit(:content,:user_id,:question_id)
-end
+  def answer_params
+    params.require(:answer).permit(:content,:user_id,:question_id)
+  end
 
 end
