@@ -2,10 +2,11 @@ require 'rails_helper'
 
   describe QuestionsController do
 
-    describe 'GET #index' do 
+    describe 'GET #index' do
 
       it "populates an array of questions" do
-        question = FactoryGirl.create(:question)
+        user = FactoryGirl.create(:user)
+        question = FactoryGirl.create(:question, user: user)
         get :index
         expect(assigns(:questions)).to eq([question])
       end
@@ -20,13 +21,15 @@ require 'rails_helper'
     describe "GET #show" do
 
       it "assigns the requested question to @question" do
-        question = FactoryGirl.create(:question)
+        user = FactoryGirl.create(:user)
+        question = FactoryGirl.create(:question, user: user)
         get :show, id: question
         expect(assigns(:question)).to eq(question)
       end
 
       it "renders the #show view" do
-        get :show, id: FactoryGirl.create(:question)
+        user = FactoryGirl.create(:user)
+        get :show, id: FactoryGirl.create(:question, user: user)
         expect(response).to render_template :show
       end
 
@@ -38,7 +41,7 @@ require 'rails_helper'
 
       context "with valid attributes" do
 
-        xit "creates a new question" do            
+        xit "creates a new question" do
           post :create, question: {title: "Title", Content: "Content", user_id: 1 }
           expect(assigns(:question)).to change(Question, :count).by(1)
         end
@@ -61,7 +64,7 @@ require 'rails_helper'
               post :create, question: FactoryGirl.attributes_for(:question)
               expect(response).to render_template :new
             end
-          end 
+          end
         end
 
 
