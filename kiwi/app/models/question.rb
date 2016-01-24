@@ -1,4 +1,7 @@
 class Question < ActiveRecord::Base
+
+  include Votable
+
   belongs_to :user
   has_many :answers
   has_many :comments, as: :commentable
