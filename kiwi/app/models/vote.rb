@@ -1,5 +1,5 @@
 class Vote < ActiveRecord::Base
-  include Votable
+  # include Votable
 
   belongs_to :user
   belongs_to :votable, polymorphic: true

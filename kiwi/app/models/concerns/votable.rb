@@ -1,14 +1,14 @@
-module Votable
+# module Votable
 
-  extend ActiveSupport::Concern
+#   extend ActiveSupport::Concern
 
-  included do
-    has_many :votes, as: :votable
-  end
+#   included do
+#     has_many :votes, as: :votable
+#   end
 
-    attr_accessor :votable_attributes
-  # accepts_nested_attributes_for :votable
+#     attr_accessor :votable_attributes
+#   # accepts_nested_attributes_for :votable
 
-end
+# end
 
-ActiveRecord::Base.send(:include, Votable)
+# ActiveRecord::Base.send(:include, Votable)
