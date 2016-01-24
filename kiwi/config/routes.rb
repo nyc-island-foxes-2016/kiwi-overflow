@@ -4,10 +4,11 @@ Rails.application.routes.draw do
  #  resources :questions, only: [:new, :edit, :index]
  # end
 
-  resources :questions do
-  # resources :answers, only: [:new, :show, :delete, :edit]
-    resources :comments, only: [:new, :create]
-  end
+
+ resources :questions do
+  resources :comments, only: [:new, :create]
+  resources :answers, only: [:create]
+ end
 
  # resources :answers do
  # resources :comments, only: [:new, :show]
