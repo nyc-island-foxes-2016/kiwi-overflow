@@ -9,4 +9,9 @@ class Question < ActiveRecord::Base
 
   validates_presence_of :title, :content, :user_id
 
+
+  def sum_of_votes
+    self.votes.inject(0){|sum, vote| sum += vote.direction}
+  end
+
 end
