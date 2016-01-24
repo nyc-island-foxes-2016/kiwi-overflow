@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe Question do
-  let(:question) { FactoryGirl.create(:question) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:question) { FactoryGirl.create(:question, user: user) }
 
   it { should belong_to(:user) }
 
