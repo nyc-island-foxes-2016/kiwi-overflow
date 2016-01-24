@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find_by(id: params[:id])
+    @question = Question.find_by(id: @comment.commentable_id)
     binding.pry
   end
 
