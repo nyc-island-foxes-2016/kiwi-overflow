@@ -3,6 +3,8 @@ require 'rails_helper'
 describe Question do
   let(:question) { FactoryGirl.create(:question) }
 
+  it { should belong_to(:user) }
+
   it "has a valid factory" do
     expect(question).to be_valid
   end
