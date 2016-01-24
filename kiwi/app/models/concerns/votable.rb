@@ -1,14 +1,14 @@
-# module Votable
+module Votable
 
-#   extend ActiveSupport::Concern
+  helper_method :current_user
 
-#   included do
-#     has_many :votes, as: :votable
-#   end
+  def sum_of_votes
+    self.votes.inject(0){|sum, vote| sum += vote.direction}
+  end
 
-#     attr_accessor :votable_attributes
-#   # accepts_nested_attributes_for :votable
+  def voted?
+    binding.pry
+    self.votes.find_by(user_id: user_id)
+  end
 
-# end
-
-# ActiveRecord::Base.send(:include, Votable)
+end

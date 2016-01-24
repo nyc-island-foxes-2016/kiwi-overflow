@@ -1,6 +1,5 @@
 class Question < ActiveRecord::Base
-
-  # include Votable
+  include Votable
 
   belongs_to :user
   has_many :answers
@@ -8,10 +7,4 @@ class Question < ActiveRecord::Base
   has_many :votes, as: :votable
 
   validates_presence_of :title, :content, :user_id
-
-
-  def sum_of_votes
-    self.votes.inject(0){|sum, vote| sum += vote.direction}
-  end
-
 end
