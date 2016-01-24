@@ -119,3 +119,21 @@ label{
   margin-right: 1.5em;
   display: block
 }
+
+.question-stats {
+  display: inline;
+  margin-right: 2em;
+}
+
+.votes, .answers, .views {
+  display: inline;
+  font-weight: 900;
+  text-align: center;
+}
+.votes-label, .answers-label, .views-label {
+  display: inline;
+  margin-right: 1em;
+}
+
+
+
