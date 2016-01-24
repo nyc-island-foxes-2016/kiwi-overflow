@@ -4,8 +4,8 @@
 <% @questions.each do |question| %>
   <div class="question-container">
     <div class="question-stats">
-    
-      <div class="votes">0</div>
+
+      <div class="votes"><%= question.sum_of_votes %></div>
       <div class="votes-label">votes</div>
 
       <div class="answers">
