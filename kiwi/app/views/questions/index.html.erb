@@ -3,7 +3,22 @@
 
 <% @questions.each do |question| %>
   <div class="question-container">
+    <div class="question-stats">
+    
+      <div class="votes">0</div>
+      <div class="votes-label">votes</div>
 
-  <%= link_to question.title, question_path(question) %>
+      <div class="answers">
+        <%= question.answers.count %>
+      </div>
+      <div class="answers-label">answers</div>
+
+      <div class="views">0</div>
+      <div class="views-label">views</div>
+
+    </div>
+
+    <%= link_to question.title, question_path(question) %>
+
   </div>
   <% end %>
