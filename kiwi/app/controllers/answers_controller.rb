@@ -1,16 +1,12 @@
 class AnswersController < ApplicationController
-
-def new
-  @answer = Answer.new
-end
-
+add_flash_types(:alert)
 def create
-  binding.pry
   @answer = Answer.new(answer_params)
   if @answer.save
     redirect_to question_path(id: @answer.question_id)
   else
-    alert("An Error has Occurred!")
+    #error to be handled by ajax
+    redirect_to login_path
   end
 end
 
