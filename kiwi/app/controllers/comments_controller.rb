@@ -1,13 +1,13 @@
 class CommentsController < ApplicationController
 
   def new
+    binding.pry
     if params[:question_id]
       @commentable = Question.find_by(id: params[:question_id])
-      @comment = @commentable.comments.new
     else
       @commentable = Answer.find_by(id: params[:answer_id])
-      @comment = @commentable.comments.new
     end
+      @comment = @commentable.comments.new
   end
 
   def create
