@@ -70,10 +70,14 @@ main {
   border-bottom: 1px solid gray;
 }
 
+.answers-list {
+  margin-top: 4em;
+}
+
 .answer {
   padding: 1em;
   margin-bottom: 1em;
-  background-color: #E0EEE0; 
+  background-color: #E0EEE0;
 }
 
 form, #new-user {
@@ -99,7 +103,6 @@ textarea {
 
 .comment {
   width: 100%;
-  text-indent: 2em;
   color: gray;
 
 }
@@ -135,5 +138,9 @@ label{
   margin-right: 1em;
 }
 
-
+.user-time {
+  font-size: 13px;
+  color: green;
+  font-weight: 300;
+}
 
