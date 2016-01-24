@@ -8,5 +8,8 @@ FactoryGirl.define do
     f.user_id { rand(1..10) }
   end
 
+  factory :answer do |f|
+    f.content { Faker::Lorem.paragraph }
+    f.question_id { rand(1..10) }
 end
 
