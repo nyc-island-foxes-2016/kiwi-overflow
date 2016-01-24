@@ -1,12 +1,20 @@
 <div class="question">
   <h3 id="question-title"><%= @question.title %></h3>
-    <p>Asked by <%= @question.user.name %> on <%= std_format_date(@question.created_at) %></p>
+    <span class="user-time">Asked by <%= @question.user.name %> <%= std_format_date(@question.created_at) %></span>
     <p><%= @question.content %></p>
+
+    <ul>
+      <% if current_user == @question.user %>
+        <li><%= link_to "Edit my question", edit_question_path %></li>
+        <li><%= link_to "Delete my question", question_path, method: :delete %></li>
+      <% end %>
+    </ul>
+
       <% if !@question.comments.empty? %>
-        <h5>Comments:</h5>
-          <div class="comments">
+        <div class="comments">
+          <h5>Comments:</h5>
           <% @question.comments.each do |comment| %>
-            <p class="comment"><%= comment.content %> &bull; <%= comment.user.name %> on <%= std_format_date(comment.created_at) %> &bull; <% if current_user == comment.user %><%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete %><% end %></p>
+            <p class="comment"><%= comment.content %> &bull; <span class="user-time"><%= comment.user.name %> <%= std_format_date(comment.created_at) %></span>  <% if current_user == comment.user %><%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete %><% end %></p>
           <% end %>
           </div>
       <% end %>
@@ -18,26 +26,20 @@
   </ul>
 <% end %>
 
-<ul>
-  <% if current_user == @question.user %>
-    <li><%= link_to "Edit my question", edit_question_path %></li>
-    <li><%= link_to "Delete my question", question_path, method: :delete %></li>
-  <% end %>
-</ul>
 
 <% if !@question.answers.empty? %>
-  <h4>Answers: <%=@question.answers.count %></h4>
   <div class="answers-list">
+    <h4>Answers: <%=@question.answers.count %></h4>
     <% @question.answers.each do |answer|%>
       <div class="answer">
-        <p>Answered by <%= answer.user.name %> on <%= std_format_date(answer.created_at) %></p>
+        <span class="user-time">Answered by <%= answer.user.name %> <%= std_format_date(answer.created_at) %></span>
         <p><%= answer.content %></p>
         <% if !answer.comments.empty? %>
           <h5>Comments:</h5>
           <div class="comments">
             <% answer.comments.each do |comment| %>
             <p class="comment"><%= comment.content %> &bull;
-            <%= comment.user.name %> on <%= std_format_date(comment.created_at) %></p>
+            <span class="user-time"><%= comment.user.name %> <%= std_format_date(comment.created_at) %></span></p>
             <% end %>
           </div>
         <% end %>
@@ -52,7 +54,7 @@
 
 <hr>
 
-<h4>Your Answer</h4>
+<h4>Add Your Answer:</h4>
 <div id="answers-form">
 <%= render "answers/form" %>
 </div>
