@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
 
   def new
-    # binding.pry
     if params[:question_id]
       @commentable = Question.find_by(id: params[:question_id])
       @comment = @commentable.comments.new
@@ -20,7 +19,6 @@ class CommentsController < ApplicationController
       @comment = answer.comments.new(user: current_user, content: params[:comment][:content])
     end
     if @comment.save
-      # We may need a conditional here once we have comments to answers as well
       redirect_to question_path(id: @comment.commentable_id)
     else
       render :new
@@ -35,7 +33,6 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find_by(id: params[:id])
     if @comment.update_attributes(comment_params)
-      # We may need a conditional here once we have comments to answers as well
       redirect_to question_path(id: @comment.commentable_id)
     else
       render :edit
