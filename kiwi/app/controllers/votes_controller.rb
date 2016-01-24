@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  before_action :load_votable
+  before_action :vote_type
 
   def create
     @vote = current_user.votes.new(vote_params)
@@ -23,10 +23,13 @@ def vote_params
   params.require(:vote).permit(:direction,:user_id)
 end
 
-def load_votable
-  # binding.pry
-    resource, id = request.path.split('/')[1,2]
-    @votable = resource.singularize.classify.constantize.find(id)
+def vote_type
+
+
+
+
+
+
 end
 
 
