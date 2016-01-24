@@ -4,6 +4,16 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    if params[:sort] == "trending"
+
+    elsif params[:sort] == "most-recent"
+      @question = @questions.order(:created_at)
+    elsif params[:sort] == "rate"
+      binding.pry
+      @question = @questions.sort_by { |question| question.votes.count }.reverse
+    else
+
+    end
   end
 
   def new
@@ -30,7 +40,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-        @question = Question.find_by(id: params[:id])
+    @question = Question.find_by(id: params[:id])
     if @question.update_attributes(question_params)
       redirect_to question_path
     else

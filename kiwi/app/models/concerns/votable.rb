@@ -1,7 +1,4 @@
 module Votable
-
-  helper_method :current_user
-
   def sum_of_votes
     self.votes.inject(0){|sum, vote| sum += vote.direction}
   end
