@@ -1,24 +1,33 @@
 
 <h2>All Questions</h2>
 
+<div class="sort-by-menu">
+  <ul class="sort-by-nav">
+    <p class="sort-by-options"> Sort By </p>
+    <li class="sort-by-options"><%= link_to "Trending", root_path(sort: "trending") %></li> |
+    <li class="sort-by-options"><%= link_to "Most Recent", root_path(sort: "most-recent") %></li> |
+    <li class="sort-by-options"><%= link_to "Highest-Voted", root_path(sort: "rate")%></li>
+  </ul>
+</div>
+
 <% @questions.each do |question| %>
-  <div class="question-container">
-    <div class="question-stats">
+<div class="question-container">
+  <div class="question-stats">
 
-      <div class="votes"><%= question.sum_of_votes %></div>
-      <div class="votes-label">votes</div>
+    <div class="votes"><%= question.sum_of_votes %></div>
+    <div class="votes-label">votes</div>
 
-      <div class="answers">
-        <%= question.answers.count %>
-      </div>
-      <div class="answers-label">answers</div>
-
-      <div class="views">0</div>
-      <div class="views-label">views</div>
-
+    <div class="answers">
+      <%= question.answers.count %>
     </div>
+    <div class="answers-label">answers</div>
 
-    <%= link_to question.title, question_path(question) %>
+    <div class="views">0</div>
+    <div class="views-label">views</div>
 
   </div>
-  <% end %>
+
+  <%= link_to question.title, question_path(question) %>
+
+</div>
+<% end %>

@@ -163,3 +163,17 @@ label{
   font-weight: 300;
 }
 
+.sort-by-menu{
+  display:inline;
+}
+
+.sort-by-nav{
+  display:block-inline;
+  text-align:right;
+}
+
+.sort-by-options{
+  display:inline;
+  text-align:right;
+}
+
