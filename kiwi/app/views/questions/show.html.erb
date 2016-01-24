@@ -6,16 +6,18 @@
         <h5>Comments:</h5>
           <div class="comments">
           <% @question.comments.each do |comment| %>
-            <p class="comment"><%= comment.content %> &bull; <%= comment.user.name %> on <%= std_format_date(comment.created_at) %> &bull; <%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete %></p>
+            <p class="comment"><%= comment.content %> &bull; <%= comment.user.name %> on <%= std_format_date(comment.created_at) %> &bull; <% if current_user == comment.user %><%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete %><% end %></p>
           <% end %>
           </div>
       <% end %>
 </div>
 
-<ul>
-  <li><%= link_to "Add Comment", new_question_comment_path(@question.id) %></li>
-  <li><%= link_to "Add Answer", new_question_path %></li>
-</ul>
+<% if logged_in? %>
+  <ul>
+    <li><%= link_to "Add Comment", new_question_comment_path(@question.id) %></li>
+    <li><%= link_to "Add Answer", new_question_path %></li>
+  </ul>
+<% end %>
 
 <ul>
   <% if current_user == @question.user %>
@@ -31,16 +33,18 @@
       <div class="answer">
         <p>Answered by <%= answer.user.name %> on <%= std_format_date(answer.created_at) %></p>
         <p><%= answer.content %></p>
-          <% if !answer.comments.empty? %>
-            <h5>Comments:</h5>
-              <div class="comments">
-                <% answer.comments.each do |comment| %>
-                <p class="comment"><%= comment.content %> &bull;
-                <%= comment.user.name %> on <%= std_format_date(comment.created_at) %></p>
-                <% end %>
-              </div>
-          <% end %>
-      <%= link_to "Add Comment", new_question_path %>
+        <% if !answer.comments.empty? %>
+          <h5>Comments:</h5>
+          <div class="comments">
+            <% answer.comments.each do |comment| %>
+            <p class="comment"><%= comment.content %> &bull;
+            <%= comment.user.name %> on <%= std_format_date(comment.created_at) %></p>
+            <% end %>
+          </div>
+        <% end %>
+      <% if logged_in? %>
+        <%= link_to "Add Comment", new_question_path %>
+      <% end %>
       </div>
     <% end %>
   </div>
