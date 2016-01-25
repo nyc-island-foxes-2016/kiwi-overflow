@@ -1,15 +1,14 @@
 class QuestionsController < ApplicationController
 
   def index
-    @questions = Question.all
-    if params[:sort] == "trending"
+    if params[:sort] == "trend"
 
-    elsif params[:sort] == "most-recent"
-      @question = @questions.order(:created_at)
+    elsif params[:sort] == "recent"
+      @questions = Question.all.order(:created_at)
     elsif params[:sort] == "rate"
-      @question = @questions.sort_by { |question| question.sum_of_votes }.reverse
+      @questions = Question.all.sort_by { |question| question.sum_of_votes }.reverse
     else
-
+      @questions = Question.all
     end
   end
 
