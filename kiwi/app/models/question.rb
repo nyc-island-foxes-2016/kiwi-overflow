@@ -7,4 +7,9 @@ class Question < ActiveRecord::Base
   has_many :votes, as: :votable
 
   validates_presence_of :title, :content, :user_id
+
+  def best_answer
+    Answer.find_by(id: self.best_answer_id)
+  end
+
 end
