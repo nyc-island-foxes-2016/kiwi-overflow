@@ -15,7 +15,11 @@ FactoryGirl.define do
 
   factory :answer do |f|
     f.content { Faker::Lorem.paragraph }
-    end
+  end
+
+  factory :comment do |f|
+    f.content {Faker::Lorem.paragraph}
+  end
 
 end
 
