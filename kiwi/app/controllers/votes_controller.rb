@@ -30,13 +30,6 @@ class VotesController < ApplicationController
         @vote.save
         redirect_to question_path(id: @answer.question_id)
       end
-
-    else
-      @vote.votable_type = "Comment"
-      @vote.votable_id = params[:comment_id]
-      @vote.save
-      redirect_to question_path(id: @comment.question_id)
-    # end
     end
   end
 
