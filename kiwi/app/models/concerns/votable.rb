@@ -4,7 +4,6 @@ module Votable
   end
 
   def voted?
-    binding.pry
     self.votes.find_by(user_id: user_id)
   end
 
