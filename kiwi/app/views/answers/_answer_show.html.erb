@@ -4,6 +4,16 @@
       <li id="up-vote"><%= link_to '&#x25B2'.html_safe, answer_votes_path(answer, vote: {direction: '1'}), method: :post %></li>
       <li><%= answer.sum_of_votes %></li>
       <li id="down-vote"><%= link_to '&#x25BC'.html_safe, answer_votes_path(answer, vote: {direction: '-1'}), method: :post %></li>
+      <%# binding.pry %>
+      <% if @question.best_answer_id == answer.id %>
+        <li>BEST!</li>
+      <% else %>
+        <% if @question.user == current_user && !@question.best_answer_id %>
+          <li>
+            <%= link_to "Best?", best_answer_path(answer.id), method: :patch %>
+          </li>
+        <% end %>
+      <% end %>
     </ul>
   </div>
 
@@ -11,16 +21,17 @@
   <p><%= answer.content %></p>
 
   <% if !answer.comments.empty? %>
-  <h5>Comments:</h5>
+    <h5>Comments:</h5>
     <div class="comments">
       <% answer.comments.each do |comment| %>
         <p class="comment"><%= comment.content %> &bull;
-          <span class="user-time"><%= comment.user.name %> <%= std_format_date(comment.created_at) %></span><% if current_user == comment.user %> &bull; <%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete, data: {confirm: 'Are you sure?'}  %><% end %></p>
-        <% end %>
+          <span class="user-time"><%= comment.user.name %> <%= std_format_date(comment.created_at) %></span><% if current_user == comment.user %> &bull; <%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete, data: {confirm: 'Are you sure?'}  %><% end %>
+        </p>
+      <% end %>
     </div>
-    <% end %>
+  <% end %>
 
-    <% if logged_in? %>
+  <% if logged_in? %>
     <%= link_to "Add Comment", new_answer_comment_path(answer.id) %>
-    <% end %>
+  <% end %>
 </div>
