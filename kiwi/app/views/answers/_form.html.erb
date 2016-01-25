@@ -10,3 +10,9 @@
     <%= f.submit 'Post Answer' %>
   </fieldset>
 <% end %>
+
+<% if @errors %>
+  <% @errors.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+<% end %>
