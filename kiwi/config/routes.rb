@@ -14,6 +14,7 @@ Rails.application.routes.draw do
  resources :answers do
   resources :comments, only: [:new, :create]
   resources :votes, only: [:create, :destroy]
+  patch 'best', on: :member
  end
 
 

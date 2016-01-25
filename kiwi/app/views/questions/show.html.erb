@@ -1,33 +1,33 @@
 <div class="question">
   <h3 id="question-title"><%= @question.title %></h3>
 
-<div class="vote-container">
-  <ul class="vote-attributes">
-    <li id="up-vote"><%= link_to '&#x25B2'.html_safe, question_votes_path(@question, vote: {direction: '1'}), method: :post %></li>
-    <li><%= @question.sum_of_votes %></li>
-    <li id="down-vote"><%= link_to '&#x25BC'.html_safe, question_votes_path(@question, vote: {direction: '-1'}), method: :post %></li>
-  </ul>
-</div>
-
-    <span class="user-time">Asked by <%= @question.user.name %> <%= std_format_date(@question.created_at) %></span>
-
-    <p id="question-content"><%= @question.content %></p>
-
-    <ul>
-      <% if current_user == @question.user %>
-        <li><%= link_to "Edit my question", edit_question_path %></li>
-        <li><%= link_to "Delete my question", question_path, method: :delete %></li>
-      <% end %>
+  <div class="vote-container">
+    <ul class="vote-attributes">
+      <li id="up-vote"><%= link_to '&#x25B2'.html_safe, question_votes_path(@question, vote: {direction: '1'}), method: :post %></li>
+      <li><%= @question.sum_of_votes %></li>
+      <li id="down-vote"><%= link_to '&#x25BC'.html_safe, question_votes_path(@question, vote: {direction: '-1'}), method: :post %></li>
     </ul>
+  </div>
 
-      <% if !@question.comments.empty? %>
-        <div class="comments">
-          <h5>Comments:</h5>
-          <% @question.comments.each do |comment| %>
-            <p class="comment"><%= comment.content %> &bull; <span class="user-time"><%= comment.user.name %> <%= std_format_date(comment.created_at) %></span>  <% if current_user == comment.user %> &bull; <%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete, data: {confirm: 'Are you sure?'}  %><% end %></p>
-          <% end %>
-          </div>
+  <span class="user-time">Asked by <%= @question.user.name %> <%= std_format_date(@question.created_at) %></span>
+
+  <p id="question-content"><%= @question.content %></p>
+
+  <ul>
+    <% if current_user == @question.user %>
+      <li><%= link_to "Edit my question", edit_question_path %></li>
+      <li><%= link_to "Delete my question", question_path, method: :delete %></li>
+    <% end %>
+  </ul>
+
+  <% if !@question.comments.empty? %>
+    <div class="comments">
+      <h5>Comments:</h5>
+      <% @question.comments.order(:created_at).each do |comment| %>
+        <p class="comment"><%= comment.content %> &bull; <span class="user-time"><%= comment.user.name %> <%= std_format_date(comment.created_at) %></span>  <% if current_user == comment.user %> &bull; <%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete, data: {confirm: 'Are you sure?'}  %><% end %></p>
       <% end %>
+    </div>
+  <% end %>
 </div>
 
 <% if logged_in? %>
@@ -37,20 +37,23 @@
 <% end %>
 
 
-<% if !@question.answers.empty? %>
+<% if !@answers.empty? %>
   <div class="answers-list">
-    <h4>Answers: <%=@question.answers.count %></h4>
-    <% @question.answers.each do |answer|%>
-    
-      <%= render partial: "answers/answer_show", layout: false, locals: { answer: answer} %>
-
+    <h4>Answers: <%= @answers.count %></h4>
+    <% if @question.best_answer_id %>
+      <%= render partial: "answers/answer_show", layout: false, locals: { answer: @question.best_answer} %>
     <% end %>
-  </div>  
+    <% @answers.each do |answer|%>
+      <% if answer.id != @question.best_answer_id %>
+        <%= render partial: "answers/answer_show", layout: false, locals: { answer: answer} %>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
 
 <hr>
 
 <h4>Add Your Answer:</h4>
 <div id="answers-form">
-<%= render "answers/form" %>
+  <%= render "answers/form" %>
 </div>

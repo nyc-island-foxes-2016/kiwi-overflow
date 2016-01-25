@@ -28,6 +28,9 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.includes(:answers, :user).find(params[:id])
+    @question.increment(:views)
+    @question.save
+    @answers = @question.sort_answers_by_votes
     @answer = Answer.new
   end
 

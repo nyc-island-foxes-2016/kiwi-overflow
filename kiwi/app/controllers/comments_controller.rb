@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
       @comment = answer.comments.new(user: current_user, content: params[:comment][:content])
     end
     if @comment.save
-      redirect_to question_path(id: @comment.commentable_id)
+      redirect_to_question_path
     else
       render :new
     end
@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find_by(id: params[:id])
     if @comment.update_attributes(comment_params)
-      redirect_to question_path(id: @comment.commentable_id)
+      redirect_to_question_path
     else
       render :edit
     end
@@ -40,19 +40,22 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find_by(id: params[:id])
-    commentable = @comment.commentable
     @comment.destroy
-    if commentable.is_a? Question
-      redirect_to question_path(commentable.id)
-    else
-      redirect_to question_path(commentable.question.id)
-    end
+    redirect_to_question_path
   end
 
   private
 
-  def comment_params
-    params.require(:comment).permit(:content, :commentable_type, :commentable_id, :user_id)
-  end
+    def comment_params
+      params.require(:comment).permit(:content, :commentable_type, :commentable_id, :user_id)
+    end
+
+    def redirect_to_question_path
+      if @comment.commentable_type == "Question"
+        redirect_to question_path(id: @comment.commentable_id)
+      else
+        redirect_to question_path(id: @comment.commentable.question_id)
+      end
+    end
 
 end

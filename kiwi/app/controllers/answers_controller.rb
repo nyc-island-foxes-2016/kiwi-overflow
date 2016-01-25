@@ -17,6 +17,13 @@ class AnswersController < ApplicationController
     end
   end
 
+  def best
+    # binding.pry
+    @answer = Answer.find_by(id: params[:id])
+    @answer.question.update(best_answer_id: @answer.id)
+    redirect_to question_path(id: @answer.question_id)
+  end
+
   private
 
   def answer_params
