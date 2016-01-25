@@ -23,7 +23,7 @@
   <% if !answer.comments.empty? %>
     <h5>Comments:</h5>
     <div class="comments">
-      <% answer.comments.each do |comment| %>
+      <% answer.comments.order(:created_at).each do |comment| %>
         <p class="comment"><%= comment.content %> &bull;
           <span class="user-time"><%= comment.user.name %> <%= std_format_date(comment.created_at) %></span><% if current_user == comment.user %> &bull; <%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete, data: {confirm: 'Are you sure?'}  %><% end %>
         </p>
