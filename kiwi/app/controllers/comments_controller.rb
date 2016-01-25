@@ -18,7 +18,11 @@ class CommentsController < ApplicationController
       @comment = answer.comments.new(user: current_user, content: params[:comment][:content])
     end
     if @comment.save
-      redirect_to question_path(id: @comment.commentable_id)
+      if @comment.commentable_type == Question
+        redirect_to question_path(id: @comment.commentable_id)
+      else
+        redirect_to question_path(id: @comment.commentable.question_id)
+      end
     else
       render :new
     end
