@@ -3,11 +3,16 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Answer.new(answer_params)
-    if @answer.save
-      redirect_to question_path(id: @answer.question_id)
+    if request.xhr?
+      @answer.save
+       render partial: "answers/answer_show", layout: false, locals: { answer: @answer}
     else
-      #error to be handled by ajax
-      redirect_to login_path
+      if @answer.save
+        redirect_to question_path(id: @answer.question_id)
+      else
+        @errors = Answer.errors.full_messages
+        redirect_to question_path(id: @answer.question_id)
+      end
     end
   end
 
