@@ -41,33 +41,12 @@
   <div class="answers-list">
     <h4>Answers: <%=@question.answers.count %></h4>
     <% @question.answers.each do |answer|%>
-      <div class="answer">
-        <div class="vote-container">
-  <ul class="vote-attributes">
-    <li id="up-vote"><%= link_to '&#x25B2'.html_safe, answer_votes_path(answer, vote: {direction: '1'}), method: :post %></li>
-    <li><%= answer.sum_of_votes %></li>
-    <li id="down-vote"><%= link_to '&#x25BC'.html_safe, answer_votes_path(answer, vote: {direction: '-1'}), method: :post %></li>
-  </ul>
-</div>
-        <span class="user-time">Answered by <%= answer.user.name %> <%= std_format_date(answer.created_at) %></span>
-        <p><%= answer.content %></p>
-        <% if !answer.comments.empty? %>
-          <h5>Comments:</h5>
-          <div class="comments">
-            <% answer.comments.each do |comment| %>
-            <p class="comment"><%= comment.content %> &bull;
-            <span class="user-time"><%= comment.user.name %> <%= std_format_date(comment.created_at) %></span><% if current_user == comment.user %> &bull; <%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete, data: {confirm: 'Are you sure?'}  %><% end %></p>
-            <% end %>
-          </div>
-        <% end %>
-      <% if logged_in? %>
-        <%= link_to "Add Comment", new_answer_comment_path(answer.id) %>
-      <% end %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+    
+      <%= render partial: "answers/answer_show", layout: false, locals: { answer: answer} %>
 
+    <% end %>
+  </div>  
+<% end %>
 
 <hr>
 
