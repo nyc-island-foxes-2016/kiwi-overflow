@@ -33,11 +33,11 @@ class VotesController < ApplicationController
     end
   end
 
-private
+  private
 
-def vote_params
-  params.require(:vote).permit(:direction,:user_id)
-end
+  def vote_params
+    params.require(:vote).permit(:direction,:user_id)
+  end
 
 # def vote_type
 #   if !!params[:question_id]
