@@ -12,4 +12,8 @@ class Question < ActiveRecord::Base
     Answer.find_by(id: self.best_answer_id)
   end
 
+  def sort_answers_by_votes
+    self.answers.sort_by { |answer| answer.sum_of_votes }.reverse
+  end
+
 end
