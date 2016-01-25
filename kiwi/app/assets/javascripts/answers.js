@@ -8,10 +8,10 @@ $(document).on("ready", function(){
       type: "POST",
       data: valuesToSubmit,
     }).done(function(response) {
-      console.log("Success!")
+      $('#answers-form form textarea').val('');
       $('.answers-list').append(response);
     }).fail(function(response) {
-      console.log("FAILURE")
+      console.log("FAILURE");
     });
   });
 
