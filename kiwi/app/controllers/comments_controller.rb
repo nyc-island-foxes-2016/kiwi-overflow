@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
       @comment = answer.comments.new(user: current_user, content: params[:comment][:content])
     end
     if @comment.save
-      if @comment.commentable_type == Question
+      if @comment.commentable_type == "Question"
         redirect_to question_path(id: @comment.commentable_id)
       else
         redirect_to question_path(id: @comment.commentable.question_id)
@@ -36,7 +36,11 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find_by(id: params[:id])
     if @comment.update_attributes(comment_params)
-      redirect_to question_path(id: @comment.commentable_id)
+      if @comment.commentable_type == "Question"
+        redirect_to question_path(id: @comment.commentable_id)
+      else
+        redirect_to question_path(id: @comment.commentable.question_id)
+      end
     else
       render :edit
     end
