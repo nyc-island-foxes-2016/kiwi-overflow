@@ -12,18 +12,20 @@
 
 <% if @questions %>
   <% @questions.each do |question| %>
-  <div class="question-container">
-    <div class="question-stats">
-      <div class="votes"><%= question.sum_of_votes %></div>
-      <div class="votes-label">votes</div>
-      <div class="answers">
-        <%= question.answers.count %>
+    <div class="question-container">
+      <div class="question-stats">
+        <div class="votes"><%= question.sum_of_votes %></div>
+        <div class="votes-label">votes</div>
+
+        <div class="answers"><%= question.answers.count %></div>
+        <div class="answers-label">answers</div>
+
+        <div class="views">0</div>
+        <div class="views-label">views</div>
       </div>
-      <div class="answers-label">answers</div>
-      <div class="views">0</div>
-      <div class="views-label">views</div>
-    </div class="question-links">
-  <%= link_to question.title, question_path(question) %>
-  </div>
+      <div class="question-links">
+        <%= link_to question.title, question_path(question) %>
+      </div>
+    </div>
   <% end %>
-  <% end %>
+<% end %>
