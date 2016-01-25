@@ -4,13 +4,14 @@ class AnswersController < ApplicationController
   def create
     @answer = Answer.new(answer_params)
     if request.xhr?
-      @answer.save
-       render partial: "answers/answer_show", layout: false, locals: { answer: @answer}
+       if @answer.save
+        render partial: "answers/answer_show", layout: false, locals: { answer: @answer}
+      end
     else
       if @answer.save
         redirect_to question_path(id: @answer.question_id)
       else
-        @errors = Answer.errors.full_messages
+        @errors = @answer.errors.full_messages
         redirect_to question_path(id: @answer.question_id)
       end
     end
