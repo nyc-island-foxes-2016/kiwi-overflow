@@ -5,10 +5,10 @@
       <li><%= answer.sum_of_votes %></li>
       <li id="down-vote"><%= link_to '&#x25BC'.html_safe, answer_votes_path(answer, vote: {direction: '-1'}), method: :post %></li>
       <%# binding.pry %>
-      <% if @question.best_answer_id == answer.id %>
+      <% if answer.question.best_answer_id == answer.id %>
         <li>BEST!</li>
       <% else %>
-        <% if @question.user == current_user && !@question.best_answer_id %>
+        <% if answer.question.user == current_user && !answer.question.best_answer_id %>
           <li>
             <%= link_to "Best?", best_answer_path(answer.id), method: :patch %>
           </li>

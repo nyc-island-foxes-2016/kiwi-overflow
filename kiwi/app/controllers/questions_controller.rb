@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
     elsif params[:sort] == "recent"
       @questions = Question.all.order(:created_at)
     elsif params[:sort] == "rate"
+      # TODO: add a scope on question for this
       @questions = Question.all.sort_by { |question| question.sum_of_votes }.reverse
     else
       @questions = Question.all
@@ -28,8 +29,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.includes(:answers, :user).find(params[:id])
-    @question.increment(:views)
-    @question.save
+    @question.increment(:views).save
     @answers = @question.sort_answers_by_votes
     @answer = Answer.new
   end

@@ -6,19 +6,19 @@ Rails.application.routes.draw do
 
 
  resources :questions do
-  resources :comments, only: [:new, :create]
+  resources :comments, only: [:new, :create, :update]
   resources :answers, only: [:create]
   resources :votes, only: [ :create, :destroy ]
  end
 
  resources :answers do
-  resources :comments, only: [:new, :create]
+  resources :comments, only: [:new, :create, :update]
   resources :votes, only: [:create, :destroy]
   patch 'best', on: :member
  end
 
 
- resources :comments, only: [ :edit, :update, :destroy ]
+ resources :comments, only: [ :edit, :destroy ]
 
   resources :users, only: [ :new, :show, :create ]
   resources :sessions, only: [ :new, :create, :destroy ]

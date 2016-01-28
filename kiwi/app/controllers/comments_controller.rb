@@ -9,6 +9,23 @@ class CommentsController < ApplicationController
       @comment = @commentable.comments.new
   end
 
+=begin
+
+question_comments POST /questions/:question_id/comments(.:format) comments#create
+answer_comments   POST /answers/:answer_id/comments(.:format) comments#create
+
+you could do something like 
+  http://stackoverflow.com/questions/23088709/finding-parent-in-rails-polymorphic-association
+
+def find_commentable
+ resource, id = request.path.split('/')[1, 2]
+ @commentable = resource.singularize.classify.constantize.find(id)
+end
+
+It's a bit clever-clever but makes life simpler if you ever make something else commentable
+
+=end
+
   def create
     if params[:question_id]
       question = Question.find_by(id: params[:question_id])
@@ -31,7 +48,7 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find_by(id: params[:id])
-    if @comment.update_attributes(comment_params)
+    if @comment.update(content: params[:comment][:content])
       redirect_to_question_path
     else
       render :edit
@@ -47,7 +64,8 @@ class CommentsController < ApplicationController
   private
 
     def comment_params
-      params.require(:comment).permit(:content, :commentable_type, :commentable_id, :user_id)
+      # Don't accept user_id  as a param from the browser - can be forged
+      params.require(:comment).permit(:content, :commentable_type, :commentable_id).merge(user: current_user)
     end
 
     def redirect_to_question_path

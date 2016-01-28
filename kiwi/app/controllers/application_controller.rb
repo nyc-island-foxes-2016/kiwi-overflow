@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  # This might help
+  # before_action :authorize_user! only: [:new, :create, :update, :destroy]
+  # for exceptions, use skip_before_action in particular controllers where necessary
+
   helper_method :current_user, :logged_in?
 
   def current_user
@@ -10,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_user!
-    redirect_to new_admin_session_path unless current_user.present?
+    redirect_to new_admin_session_path unless current_user
   end
 
   def login user

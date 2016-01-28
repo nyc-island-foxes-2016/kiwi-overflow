@@ -2,7 +2,7 @@ class VotesController < ApplicationController
 
   def create
     @vote = current_user.votes.new(vote_params)
-    if !!params[:question_id]
+    if params[:question_id]
       @question = Question.find(params[:question_id])
       if !@question.votes.find_by(user_id: current_user)
         @vote.votable_type = "Question"
@@ -16,7 +16,7 @@ class VotesController < ApplicationController
         @vote.save
         redirect_to question_path(id: @vote.votable_id)
       end
-    elsif !!params[:answer_id]
+    elsif params[:answer_id]
       @answer = Answer.find_by(id: params[:answer_id])
       if !@answer.votes.find_by(user_id: current_user)
         @vote.votable_type = "Answer"
@@ -38,6 +38,7 @@ class VotesController < ApplicationController
   def vote_params
     params.require(:vote).permit(:direction,:user_id)
   end
+
 
 # def vote_type
 #   if !!params[:question_id]

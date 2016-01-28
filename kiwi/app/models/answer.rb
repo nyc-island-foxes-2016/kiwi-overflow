@@ -9,4 +9,8 @@ class Answer < ActiveRecord::Base
 
   validates_presence_of :content, :user, :question
 
+  #make answer finding a concern of answer
+  def self.best_for_question question
+    find_by(id: question.best_answer_id)
+  end
 end

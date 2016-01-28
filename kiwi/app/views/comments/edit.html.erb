@@ -1,6 +1,6 @@
 <h2>Edit your comment</h2>
 
-<%= form_for @comment do |f| %>
+<%= form_for [@comment.commentable, @comment] do |f| %>
   <fieldset id="form">
 
     <div class="input-options">

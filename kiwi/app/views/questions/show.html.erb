@@ -23,8 +23,8 @@
   <% if !@question.comments.empty? %>
     <div class="comments">
       <h5>Comments:</h5>
-      <% @question.comments.order(:created_at).each do |comment| %>
-        <p class="comment"><%= comment.content %> &bull; <span class="user-time"><%= comment.user.name %> <%= std_format_date(comment.created_at) %></span>  <% if current_user == comment.user %> &bull; <%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete, data: {confirm: 'Are you sure?'}  %><% end %></p>
+      <% @question.comments_by_recency.each do |comment| %>
+        <p class="comment"><%= comment.content %> &bull; <span class="user-time"><%= comment.user.name %> <%= std_format_date(comment.created_at) %></span>  <% if comment.owned_by?(current_user) %> &bull; <%= link_to "Edit", edit_comment_path(comment.id) %> &bull; <%= link_to "Delete",comment_path(comment.id), method: :delete, data: {confirm: 'Are you sure?'}  %><% end %></p>
       <% end %>
     </div>
   <% end %>
@@ -37,7 +37,7 @@
 <% end %>
 
 
-<% if !@answers.empty? %>
+<% if @answers.any? %>
   <div class="answers-list">
     <h4>Answers: <%= @answers.count %></h4>
     <% if @question.best_answer_id %>

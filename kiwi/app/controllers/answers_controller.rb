@@ -11,6 +11,7 @@ class AnswersController < ApplicationController
       if @answer.save
         redirect_to question_path(id: @answer.question_id)
       else
+        # Errors are lost on redirect (it's a new request)
         @errors = @answer.errors.full_messages
         redirect_to question_path(id: @answer.question_id)
       end
